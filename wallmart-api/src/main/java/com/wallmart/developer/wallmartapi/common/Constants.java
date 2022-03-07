@@ -16,6 +16,10 @@ public class Constants {
 
 	public static final String SEARCH_BY_ID = "/searchid";
 
+	public static final String SEARCH_BY_BRAND = "/searchbrand";
+
+	public static final String SEARCH_BY_PRODUCT = "/search";
+
 	public static final String SEARCH_ALL = "/searchall";
 
 	public static final String SAVE = "/save";
@@ -29,6 +33,14 @@ public class Constants {
 	public static final String SUCCESS_SAVE = "Producto guardado correctamente.";
 
 	public static final String SUCCESS_DELETE = "Producto eliminado correctamente.";
+
+	public static final String DEFAULT_PAGE = "0";
+
+	public static final String DEFAULT_SIZE = "10";
+
+	public static final String DEFAULT_ORDER = "id";
+
+	public static final String DEFAULT_ASC = "true";
 
 	/**
      * Default DATE TIME FORMAT

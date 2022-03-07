@@ -1,8 +1,10 @@
 package com.wallmart.developer.wallmartapi.interfaces;
 
-import java.util.List;
-
+import com.wallmart.developer.wallmartapi.data.ProductDTO;
 import com.wallmart.developer.wallmartapi.document.ProductDocument;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 /**
  * @author Kevin Candia
@@ -10,6 +12,12 @@ import com.wallmart.developer.wallmartapi.document.ProductDocument;
  */
 public interface IProduct {
 
-    public List<ProductDocument> findAll();
+    public Page<ProductDTO> findAll(Pageable productPage);
+
+    public ProductDTO findById(Long id);
+
+    public Page<ProductDTO> findByBrandDescriptionLike(Pageable productPage, String value);
+
+    public void save(ProductDocument product);
 
 }

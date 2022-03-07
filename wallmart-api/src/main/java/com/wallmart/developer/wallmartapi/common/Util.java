@@ -23,4 +23,8 @@ public class Util implements Serializable {
             HttpStatus.NO_CONTENT: HttpStatus.OK;
     }
 
+    public boolean isPalindrome(String cadena) {
+		return new StringBuilder(cadena).reverse().toString().equals(cadena);
+	}
+
 }

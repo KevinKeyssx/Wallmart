@@ -24,7 +24,7 @@ public class ProductDocument implements Serializable {
     @Id
     private Long id;
 	private String brand;
-	private String descripcion;
+	private String description;
 	private String image;
 	private int price;
 

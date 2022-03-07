@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: "Wallmart Products"
+  data:
+    mongodb:
+      authentication-database: none
+      database: wallmart
+      port: 27017
+      host: localhost
+
+server:
+  port: 8030
+  tomcat:
+    mbeanregistry:
+      enabled: true

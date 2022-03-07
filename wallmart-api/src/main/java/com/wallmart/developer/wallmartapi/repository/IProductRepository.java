@@ -1,8 +1,12 @@
 package com.wallmart.developer.wallmartapi.repository;
 
 
+import java.util.List;
+
 import com.wallmart.developer.wallmartapi.document.ProductDocument;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
@@ -12,5 +16,7 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface IProductRepository extends MongoRepository<ProductDocument, Long> {
+
+    public Page<ProductDocument> findByBrandLikeOrDescriptionLike(Pageable productPage, String brand, String description);
 
 }
