@@ -7,4 +7,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'wallmart-ui';
+
+  constructor() {
+    console.log('Wallmart start...');
+  }
 }

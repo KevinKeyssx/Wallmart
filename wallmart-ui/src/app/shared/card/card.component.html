@@ -1,0 +1,18 @@
+<div class="card-container">
+
+    <!-- <h1 class="style">Recomendado para ti</h1> -->
+    <h2><strong>All Games<span>( {{dataPage.totalElements}} )</span></strong></h2>
+
+    <div class="cards">
+        <figure class="card animate__animated animate__rollIn" *ngFor="let data of dataPage.content">
+            <img src="//{{data.image}}" alt="{{data.brand}}"/>
+            <figcaption>
+                <h4>{{data.brand}}</h4>
+                <h5>${{data.price}}</h5>
+                <span>{{data.description}}</span>
+                <button mat-icon-button color="warn">
+                </button>
+            </figcaption>
+        </figure>
+    </div>
+</div>

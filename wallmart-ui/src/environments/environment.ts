@@ -3,7 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production      : false,
+  development     : true,
+  URL_LOCALHOST   : 'http://localhost:8030/wallmart/v1/'
 };
 
 /*
