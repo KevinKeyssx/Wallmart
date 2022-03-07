@@ -1,8 +1,5 @@
 package com.wallmart.developer.wallmartapi.repository;
 
-
-import java.util.List;
-
 import com.wallmart.developer.wallmartapi.document.ProductDocument;
 
 import org.springframework.data.domain.Page;
