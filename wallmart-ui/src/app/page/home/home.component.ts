@@ -9,21 +9,16 @@ import { AppService } from 'src/app/service/app.service';
 })
 export class HomeComponent implements OnInit {
 
-  private pageable : IPageable = {} as IPageable;
   public dataProduct: IPage = {} as IPage;
+  public data: IPageable = {} as IPageable;
 
-  constructor(public appService: AppService) {
-    // Default values
-    this.pageable.page  = 0;
-    this.pageable.size  = 10;
-    this.pageable.order = 'id';
-    this.pageable.asc   = true;
+  constructor(public appService: AppService) { }
 
-    
-  }
+  ngOnInit(): void { }
 
-  ngOnInit(): void {
-    
+  public getPageable(value: IPageable) {
+    this.data = value;
+    console.log('EVENT OUTPUT:', this.data);
   }
 
 }

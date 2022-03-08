@@ -12,10 +12,6 @@ import org.springframework.data.domain.Pageable;
  */
 public interface IProduct {
 
-    public Page<ProductDTO> findAll(Pageable productPage);
-
-    public ProductDTO findById(Long id);
-
     public Page<ProductDTO> findByBrandDescriptionLike(Pageable productPage, String value);
 
     public void save(ProductDocument product);

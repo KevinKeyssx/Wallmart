@@ -1,0 +1,33 @@
+.input {
+    margin-top: 1.5%;
+    margin-left: 15%;
+    position: absolute;
+    width: 80%;
+}
+
+.navbar {
+    padding: 20px;
+    height: 100px
+}
+
+.img {
+    position: absolute;
+}
+
+@media (max-width:1170px){
+    .img {
+        display: none;
+        transition: 0.2s;
+    }
+
+    .input {
+        margin-top: 1.5%;
+        margin-left: 3%;
+        position: absolute;
+        width: 95%;
+    }
+
+    .navbar {
+        padding: 0px;
+    }
+}

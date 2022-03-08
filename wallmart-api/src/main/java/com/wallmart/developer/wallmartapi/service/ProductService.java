@@ -28,27 +28,16 @@ public class ProductService implements IProduct {
     private IProductRepository productRepository;
 
     @Override
-    public Page<ProductDTO> findAll(Pageable productPage) {
-        log.info("STARTING - findAll");
-        var all = productRepository.findAll(productPage);
-        applyDiscount(all);
-        log.info("FINISHING - findAll");
-        return fillProductDTO(all);
-    }
-
-    @Override
-    public ProductDTO findById(Long id) {
-        log.info("STARTING - findId");
-        var findId = productRepository.findById(id).orElseThrow();
-        applyDiscount(findId);
-        log.info("FINISHING - findId");
-        return fillProductDTO(findId);
-    }
-
-    @Override
     public Page<ProductDTO> findByBrandDescriptionLike(Pageable productPage, String value) {
         log.info("STARTING - findByBrandLikeOrDescriptionLike");
-        var findLike = productRepository.findByBrandLikeOrDescriptionLike(productPage, value, value);
+        Page<ProductDocument> findLike = null;
+        if (new Util(true).isLong(value)) {
+            var valueLong = Long.parseLong(value);
+            findLike = productRepository.findById(productPage, valueLong);
+		}
+        else {
+            findLike = productRepository.findByBrandLikeOrDescriptionLike(productPage, value, value);
+        }
         applyDiscount(findLike);
         log.info("FINISHING - findByBrandLikeOrDescriptionLike");
         return fillProductDTO(findLike);
@@ -56,16 +45,12 @@ public class ProductService implements IProduct {
 
     private void applyDiscount(Page<ProductDocument> find){
         find.forEach(product -> {
-            applyDiscount(product);
+            if (new Util(true).isPalindrome(product.getBrand())) {
+                //Aplicar 50% de descuento
+                log.info("IS PALINDROME!!!");
+                product.setPrice((int)(product.getPrice() * 0.5));
+            }
         });
-    }
-
-    private void applyDiscount(ProductDocument product){
-        if (new Util(true).isPalindrome(product.getBrand())) {
-            //Aplicar 50% de descuento
-            log.info("IS PALINDROME!!!");
-            product.setPrice((int)(product.getPrice() * 0.5));
-        }
     }
 
     private Page<ProductDTO> fillProductDTO(Page<ProductDocument> productPage) {

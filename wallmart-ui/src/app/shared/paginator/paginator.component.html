@@ -1,0 +1,31 @@
+<div class="container container__footer">
+    <div class="row">
+        <div class="col-1 align-self-start order">
+            <span>Ordenar por tipo</span>
+        </div>
+
+        <div class="col-2 align-self-center brand">
+            <select class="form-select drop__list" aria-label="Default select example" (change)="onChange($event)">
+                <option *ngFor="let object of order">{{object}}</option>
+            </select>
+        </div>
+
+        <div class="col-2 align-self-center ascending">
+            <mat-checkbox class="example-margin" [checked]="true" (change)="onCheck($event)">Ascendente</mat-checkbox>
+        </div>
+
+        <div class="col-1 align-self-end width__pag">
+            <div>
+                <mat-paginator
+                    (page)="handlePageEvent($event)"
+                    [length]="length"
+                    [pageSize]="this.appService.paginator.size"
+                    [showFirstLastButtons]="showFirstLastButtons"
+                    [pageSizeOptions]="pageSizeOptions"
+                    [pageIndex]="this.appService.paginator.page"
+                    aria-label="Select page">
+                </mat-paginator>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,6 +1,7 @@
 package com.wallmart.developer.wallmartapi.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -41,34 +42,12 @@ public class ProductController {
     @Autowired
 	private IProduct iProduct;
 
-    @GetMapping(path = Constants.SEARCH_ALL, produces = "application/json")
-	public ResponseEntity<Page<ProductDTO>> findAll(
-		@RequestParam(defaultValue = Constants.DEFAULT_PAGE) int page,
-		@RequestParam(defaultValue = Constants.DEFAULT_SIZE) int size,
-		@RequestParam(defaultValue = Constants.DEFAULT_ORDER) String order,
-		@RequestParam(defaultValue = Constants.DEFAULT_ASC) boolean asc
-	) throws ParseException {
-		log.info("*START - Controller findAll*");
-		var sort = asc ? Sort.by(order) : Sort.by(order).descending();
-		var productsDTO = iProduct.findAll(PageRequest.of(page, size, sort));
-		log.info("*FINISHED - Controller findAll*");
-		return new ResponseEntity<>(productsDTO, new Util(true).typeStatus(productsDTO));
-	}
-
-	@GetMapping(path = Constants.SEARCH_BY_ID, produces = "application/json")
-	public ResponseEntity<ProductDTO> findById(@RequestParam Long id) throws ParseException {
-		log.info("*START - Controller findById*");
-		var productsDTO = iProduct.findById(id);
-		log.info("*FINISHED - Controller findById*");
-		return new ResponseEntity<>(productsDTO, new Util(true).typeStatus(productsDTO));
-	}
-
 	@GetMapping(path = Constants.SEARCH_BY_PRODUCT, produces = "application/json")
 	public ResponseEntity<Page<ProductDTO>> findByProduct(
-		@RequestParam(defaultValue = Constants.DEFAULT_PAGE) int page,
-		@RequestParam(defaultValue = Constants.DEFAULT_SIZE) int size,
-		@RequestParam(defaultValue = Constants.DEFAULT_ORDER) String order,
-		@RequestParam(defaultValue = Constants.DEFAULT_ASC) boolean asc,
+		@RequestParam(defaultValue = Constants.DEFAULT_PAGE) 	int page,
+		@RequestParam(defaultValue = Constants.DEFAULT_SIZE) 	int size,
+		@RequestParam(defaultValue = Constants.DEFAULT_ORDER) 	String order,
+		@RequestParam(defaultValue = Constants.DEFAULT_ASC) 	boolean asc,
 		@RequestParam String value
 	) throws ParseException {
 		log.info("*START - Controller findByProduct*");

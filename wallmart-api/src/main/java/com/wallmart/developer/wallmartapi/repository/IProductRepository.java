@@ -16,4 +16,6 @@ public interface IProductRepository extends MongoRepository<ProductDocument, Lon
 
     public Page<ProductDocument> findByBrandLikeOrDescriptionLike(Pageable productPage, String brand, String description);
 
+    public Page<ProductDocument> findById(Pageable productPage, Long id);
+
 }

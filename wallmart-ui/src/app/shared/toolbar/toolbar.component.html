@@ -1,0 +1,9 @@
+<mat-toolbar color="primary" class="navbar">
+    <img class="img" width="150px" src="../../../assets/Líder_logo.svg" alt="lider logo">
+    <span class="example-spacer"></span>
+    <mat-form-field appearance="outline" class="input">
+        <mat-label>Busca lo que desees...</mat-label>
+        <input matInput placeholder="Buscar" (keyup)="searchProduct($event)">
+        <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+</mat-toolbar>

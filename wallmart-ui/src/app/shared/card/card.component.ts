@@ -1,6 +1,5 @@
-import { Component, OnInit, Input }     from '@angular/core';
-import { IPage }                        from 'src/app/interface/http.interface';
-import { AppService } from 'src/app/service/app.service';
+import { Component, OnInit }    from '@angular/core';
+import { AppService }           from 'src/app/service/app.service';
 
 @Component({
   selector        : 'app-card',
@@ -9,18 +8,20 @@ import { AppService } from 'src/app/service/app.service';
 })
 export class CardComponent implements OnInit {
 
-  public dataPage: IPage = {} as IPage;
+  constructor(public appService: AppService) { }
 
-  constructor(private appService: AppService) {
-    this.appService.setProducts$()!.subscribe((response: any) => {
-      this.dataPage = response
-      console.log('CARD DATA:', response);
-    });
+  ngOnInit(): void { }
+
+  public addPoint(value: number): string {
+    return value.toLocaleString();
   }
 
-  ngOnInit(): void {
-    
+  public isPalindrome(value: string): boolean {
+    return value.split("").reverse().join("") === value;
+  }
+
+  public realPrice(value: number): number {
+    return value * 2;
   }
 
 }
-6

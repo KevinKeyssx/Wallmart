@@ -27,4 +27,16 @@ public class Util implements Serializable {
 		return new StringBuilder(cadena).reverse().toString().equals(cadena);
 	}
 
+    public boolean isLong(String value) {
+        try{
+            var myLong = Long.parseLong(value);
+            System.out.println(myLong);
+            return true;
+        }
+        catch (Exception e) {
+            System.out.println("The input string does not represent a valid number");
+            return false;
+        }
+    }
+
 }
