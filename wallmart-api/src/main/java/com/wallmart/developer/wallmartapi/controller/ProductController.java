@@ -1,33 +1,24 @@
 package com.wallmart.developer.wallmartapi.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.wallmart.developer.wallmartapi.common.Constants;
 import com.wallmart.developer.wallmartapi.common.Util;
 import com.wallmart.developer.wallmartapi.data.ProductDTO;
-import com.wallmart.developer.wallmartapi.data.ResponseDTO;
-import com.wallmart.developer.wallmartapi.document.ProductDocument;
 import com.wallmart.developer.wallmartapi.interfaces.IProduct;
 
 import lombok.extern.log4j.Log4j2;
 
 import java.text.ParseException;
-import java.util.Date;
-
-import javax.validation.Valid;
 
 /**
  * @author Kevin Candia
@@ -48,21 +39,13 @@ public class ProductController {
 		@RequestParam(defaultValue = Constants.DEFAULT_SIZE) 	int size,
 		@RequestParam(defaultValue = Constants.DEFAULT_ORDER) 	String order,
 		@RequestParam(defaultValue = Constants.DEFAULT_ASC) 	boolean asc,
-		@RequestParam String value
+		@RequestParam(required = true) 							String value
 	) throws ParseException {
 		log.info("*START - Controller findByProduct*");
 		var sort = asc ? Sort.by(order) : Sort.by(order).descending();
 		var productsDTO = iProduct.findByBrandDescriptionLike(PageRequest.of(page, size, sort), value);
 		log.info("*FINISHED - Controller findByProduct*");
 		return new ResponseEntity<>(productsDTO, new Util(true).typeStatus(productsDTO));
-	}
-
-	@PostMapping(path =	Constants.SAVE, consumes = "application/json", produces = "application/json")
-	public ResponseEntity<ResponseDTO> save(@Valid @RequestBody ProductDocument tareaDTO) {
-		log.info("*START - Controller save*");
-		iProduct.save(tareaDTO);
-		log.info("*FINISHED - Controller save*");
-		return new ResponseEntity<>(new ResponseDTO(Constants.SUCCESS_SAVE, new Date(), true), HttpStatus.CREATED);
 	}
 
 }

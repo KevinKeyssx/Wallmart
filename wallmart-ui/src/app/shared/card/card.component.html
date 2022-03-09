@@ -12,10 +12,10 @@
                 <p>{{data.description}}</p>
                 <div class="product-bottom-details">
                     <div class="product-price">
-                        <small *ngIf="isPalindrome(data.brand) || isPalindrome(data.description)">${{addPoint(realPrice(data.price))}}</small>${{addPoint(data.price)}}
+                        <small *ngIf="isPalindrome(data.brand) || isPalindrome(data.description) || isPalindrome(data.id.toString())">${{addPoint(realPrice(data.price))}}</small>${{addPoint(data.price)}}
                     </div>
                 </div>
-                <div class="chip" *ngIf="isPalindrome(data.brand) || isPalindrome(data.description)">50%</div>
+                <div class="chip" *ngIf="isPalindrome(data.brand) || isPalindrome(data.description) || isPalindrome(data.id.toString())">50%</div>
             </div>
         </div>
     </div>

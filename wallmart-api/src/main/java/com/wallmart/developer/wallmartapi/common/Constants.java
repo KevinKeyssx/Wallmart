@@ -14,10 +14,6 @@ public class Constants {
 
 	public static final String SEARCH_BY_PRODUCT = "/search";
 
-	public static final String SAVE = "/save";
-
-	public static final String SUCCESS_SAVE = "Producto guardado correctamente.";
-
 	public static final String DEFAULT_PAGE = "0";
 
 	public static final String DEFAULT_SIZE = "10";

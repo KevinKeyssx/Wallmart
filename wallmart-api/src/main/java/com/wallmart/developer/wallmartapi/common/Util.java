@@ -29,8 +29,7 @@ public class Util implements Serializable {
 
     public boolean isLong(String value) {
         try{
-            var myLong = Long.parseLong(value);
-            System.out.println(myLong);
+            Long.parseLong(value);
             return true;
         }
         catch (Exception e) {

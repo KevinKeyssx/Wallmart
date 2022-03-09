@@ -13,7 +13,7 @@ import io.swagger.v3.oas.annotations.info.License;
  * @date 04-03-2022
  */
 @Configuration
-@OpenAPIDefinition(info = @Info(title = "Tareas", license = @License(name = "Copyright © 2022 Tareas"), description = "Mantenedor de tareas"))
+@OpenAPIDefinition(info = @Info(title = "Wallmart", license = @License(name = "Copyright © 2022 Wallmart"), description = "Busquedas de productos"))
 public class WebConfig implements WebMvcConfigurer {
 
 	@Override

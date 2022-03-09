@@ -14,24 +14,27 @@ export class ToolbarComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.findProduct(this.appService.paginator, 'product/search', '');
+    this.findProduct();
   }
 
   public searchProduct(event: any): void {
     this.appService.product = event.target.value;
     if (event.target.value === '') {
-      this.findProduct(this.appService.paginator, 'product/search', event.target.value);
+      this.appService.paginator.length = 3000;
+      this.findProduct(this.appService.paginator, event.target.value);
     }
     else if (!isNaN(Number(event.target.value))) {
-      this.findProduct(this.appService.paginator,'product/search', event.target.value);
+      this.appService.paginator.length = 1;
+      this.findProduct(this.appService.paginator, event.target.value);
     }
     else if (event.target.value.toString().length > 2) {
-      this.findProduct(this.appService.paginator,'product/search', event.target.value);
+      this.appService.paginator.length = 3000;
+      this.findProduct(this.appService.paginator, event.target.value);
     }
   }
 
-  private findProduct(data: IPageable, endpoint: string, event: any): void {
-    this.appService.setProducts$(data, endpoint, event)!
+  private findProduct(data?: IPageable, value?: string): void {
+    this.appService.setProducts$(data, value)!
       .subscribe({
         next: (response: any) => {
           console.log('Buscar Producto:', response);

@@ -18,7 +18,7 @@ import lombok.Setter;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-@Document
+@Document(collection = "product")
 public class ProductDocument implements Serializable {
 
     @Id

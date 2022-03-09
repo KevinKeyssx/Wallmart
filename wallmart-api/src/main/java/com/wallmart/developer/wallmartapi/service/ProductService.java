@@ -1,7 +1,10 @@
 package com.wallmart.developer.wallmartapi.service;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.wallmart.developer.wallmartapi.common.Util;
 import com.wallmart.developer.wallmartapi.data.ProductDTO;
 import com.wallmart.developer.wallmartapi.document.ProductDocument;
@@ -9,6 +12,7 @@ import com.wallmart.developer.wallmartapi.interfaces.IProduct;
 import com.wallmart.developer.wallmartapi.repository.IProductRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -27,30 +31,55 @@ public class ProductService implements IProduct {
     @Autowired
     private IProductRepository productRepository;
 
+    @Value("${data}")
+    private String data;
+    private boolean fillDB = false;
+
     @Override
     public Page<ProductDTO> findByBrandDescriptionLike(Pageable productPage, String value) {
-        log.info("STARTING - findByBrandLikeOrDescriptionLike");
         Page<ProductDocument> findLike = null;
+        fillDBData();
         if (new Util(true).isLong(value)) {
+            log.info("STARTING - findById");
             var valueLong = Long.parseLong(value);
             findLike = productRepository.findById(productPage, valueLong);
 		}
         else {
+            log.info("STARTING - findByBrandLikeOrDescriptionLike");
             findLike = productRepository.findByBrandLikeOrDescriptionLike(productPage, value, value);
         }
         applyDiscount(findLike);
-        log.info("FINISHING - findByBrandLikeOrDescriptionLike");
+        log.info("FINISHING - findBy");
         return fillProductDTO(findLike);
     }
 
+    private void fillDBData() {
+        if (!fillDB) {
+            fillDB = true;
+            //insertar datos
+            productRepository.saveAll(new Gson().fromJson(data, new TypeToken<List<ProductDocument>>(){}.getType()));
+            log.info("***SAVE ALL");
+        }
+    }
+
     private void applyDiscount(Page<ProductDocument> find){
+        if (find == null) {
+            return;
+        }
+        log.info("STARTING - applyDiscount");
+        var util = new Util(true);
         find.forEach(product -> {
-            if (new Util(true).isPalindrome(product.getBrand())) {
+            if (
+                util.isPalindrome(product.getBrand()) ||
+                util.isPalindrome(product.getDescription()) ||
+                util.isPalindrome(String.valueOf(product.getId()))
+            ) {
                 //Aplicar 50% de descuento
                 log.info("IS PALINDROME!!!");
                 product.setPrice((int)(product.getPrice() * 0.5));
             }
         });
+        log.info("FINISHING - applyDiscount");
     }
 
     private Page<ProductDTO> fillProductDTO(Page<ProductDocument> productPage) {
@@ -74,13 +103,6 @@ public class ProductService implements IProduct {
             product.getImage(),
             product.getPrice()
         );
-    }
-
-    @Override
-    public void save(ProductDocument product) {
-        log.info("STARTING - save");
-        productRepository.save(product);
-        log.info("FINISHING - save");
     }
 
 }

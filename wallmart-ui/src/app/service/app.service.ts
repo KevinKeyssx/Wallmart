@@ -17,17 +17,17 @@ export class AppService {
 
   constructor(private http: HttpClient) { }
 
-  public setProducts$(pageable? : IPageable, endpoint?: string, value?: string): Observable<object> | null {
+  public setProducts$(pageable? : IPageable, value?: string): Observable<object> | null {
     console.log('Get Products...');
     return this.sendRequestApi$({
       verb  : 'GET',
-      url   : environment.URL_LOCALHOST + (endpoint ? endpoint : Constants.END_PRODUCT_SEARCH),
+      url   : environment.URL_LOCALHOST + Constants.END_PRODUCT_SEARCH,
       params : [
         { key: 'value',  value: value ? value : '' }, 
-        { key: 'page',   value: pageable ? pageable.page : 0 }, 
-        { key: 'size',   value: pageable ? pageable.size : 10 }, 
-        { key: 'order',  value: pageable ? pageable.order: 'id' }, 
-        { key: 'asc',    value: pageable ? pageable.asc: true }]
+        { key: 'page',   value: pageable ? pageable.page  : 0 }, 
+        { key: 'size',   value: pageable ? pageable.size  : 10 }, 
+        { key: 'order',  value: pageable ? pageable.order : 'id' }, 
+        { key: 'asc',    value: pageable ? pageable.asc   : true }]
     })!
     .pipe(map((response: any) => {
         this.productData = response;

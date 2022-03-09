@@ -1,7 +1,6 @@
 package com.wallmart.developer.wallmartapi.interfaces;
 
 import com.wallmart.developer.wallmartapi.data.ProductDTO;
-import com.wallmart.developer.wallmartapi.document.ProductDocument;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -13,7 +12,5 @@ import org.springframework.data.domain.Pageable;
 public interface IProduct {
 
     public Page<ProductDTO> findByBrandDescriptionLike(Pageable productPage, String value);
-
-    public void save(ProductDocument product);
 
 }

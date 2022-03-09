@@ -18,7 +18,7 @@
             <div>
                 <mat-paginator
                     (page)="handlePageEvent($event)"
-                    [length]="length"
+                    [length]="this.appService.paginator.length"
                     [pageSize]="this.appService.paginator.size"
                     [showFirstLastButtons]="showFirstLastButtons"
                     [pageSizeOptions]="pageSizeOptions"

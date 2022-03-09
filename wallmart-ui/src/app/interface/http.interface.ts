@@ -36,4 +36,5 @@ export interface IPageable {
     size                : number;
     order               : string
     asc                 : boolean;
+    length              : number
 }

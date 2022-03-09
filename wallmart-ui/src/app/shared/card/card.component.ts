@@ -1,4 +1,4 @@
-import { Component, OnInit }    from '@angular/core';
+import { Component }            from '@angular/core';
 import { AppService }           from 'src/app/service/app.service';
 
 @Component({
@@ -6,11 +6,9 @@ import { AppService }           from 'src/app/service/app.service';
   templateUrl     : './card.component.html',
   styleUrls       : ['./card.component.styl']
 })
-export class CardComponent implements OnInit {
+export class CardComponent {
 
   constructor(public appService: AppService) { }
-
-  ngOnInit(): void { }
 
   public addPoint(value: number): string {
     return value.toLocaleString();
