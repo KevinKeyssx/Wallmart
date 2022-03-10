@@ -1,10 +1,7 @@
 package com.wallmart.developer.wallmartapi.service;
 
 import java.util.ArrayList;
-import java.util.List;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.wallmart.developer.wallmartapi.common.Util;
 import com.wallmart.developer.wallmartapi.data.ProductDTO;
 import com.wallmart.developer.wallmartapi.document.ProductDocument;
@@ -12,7 +9,6 @@ import com.wallmart.developer.wallmartapi.interfaces.IProduct;
 import com.wallmart.developer.wallmartapi.repository.IProductRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -31,14 +27,9 @@ public class ProductService implements IProduct {
     @Autowired
     private IProductRepository productRepository;
 
-    @Value("${data}")
-    private String data;
-    private boolean fillDB = false;
-
     @Override
     public Page<ProductDTO> findByBrandDescriptionLike(Pageable productPage, String value) {
         Page<ProductDocument> findLike = null;
-        fillDBData();
         if (new Util(true).isLong(value)) {
             log.info("STARTING - findById");
             var valueLong = Long.parseLong(value);
@@ -51,15 +42,6 @@ public class ProductService implements IProduct {
         applyDiscount(findLike);
         log.info("FINISHING - findBy");
         return fillProductDTO(findLike);
-    }
-
-    private void fillDBData() {
-        if (!fillDB) {
-            fillDB = true;
-            //insertar datos
-            productRepository.saveAll(new Gson().fromJson(data, new TypeToken<List<ProductDocument>>(){}.getType()));
-            log.info("***SAVE ALL");
-        }
     }
 
     private void applyDiscount(Page<ProductDocument> find){

@@ -1,18 +1,33 @@
 spring:
-  application:
-    name: "Wallmart Products"
-  data:
-    mongodb:
-      authentication-database: none
-      database: wallmart
-      port: 27017
-      host: localhost
+    application:
+        name: "Wallmart"
+    data:
+        mongodb:
+            authentication-database: none
+            # authentication-database: admin
+            # username: wallmart
+            # password: wallmart1234
+            database: wallmart
+            port: 27017
+            # host: mongodb
+            host: localhost
 
 server:
-  port: 8030
-  tomcat:
-    mbeanregistry:
-      enabled: true
+    error:
+        include-message: always
+    port: 8030
+    tomcat:
+        mbeanregistry:
+            enabled: true
+
+logging:
+    level:
+        org:
+            springframework:
+                data:
+                    mongodb:
+                        core:
+                            MongoTemplate: DEBUG
 
 data: "[{
         \"id\": 1,
