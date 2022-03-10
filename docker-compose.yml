@@ -1,34 +1,6 @@
 version: '3.7'
 services:
 
-  wallmart-ui:
-    image: wallmart-ui:0.0.1
-    container_name: angular-app
-    # volumes:
-      # - './:user/src/app'
-    ports:
-      - 80:80
-    networks:
-      - shared-net
-    # command: >
-      # bash -c "npm start"
-    # links:
-      # - wallmart-api
-    depends_on:
-      - wallmart-api
-
-  wallmart-api:
-    image: wallmart-api:0.0.1
-    container_name: springboot-app
-    depends_on:
-      - mongodb
-    # links:
-      # - mongodb
-    ports:
-      - 8030:8030
-    networks:
-      - shared-net
-
   mongodb:
     image: mongo:4.4
     container_name: mongo-app
@@ -45,6 +17,26 @@ services:
       - shared-net
     volumes:
       - /data/db:/data/db
+
+  wallmart-api:
+    image: wallmart-api:0.0.1
+    container_name: springboot-app
+    depends_on:
+      - mongodb
+    ports:
+      - 8030:8030
+    networks:
+      - shared-net
+
+  # wallmart-ui:
+  #   image: wallmart-ui:0.0.1
+  #   container_name: angular-app
+  #   ports:
+  #     - 80:80
+  #   networks:
+  #     - shared-net
+  #   depends_on:
+  #     - wallmart-api
 
 networks:
   shared-net:

@@ -9,8 +9,8 @@ spring:
             # password: wallmart1234
             database: wallmart
             port: 27017
-            # host: mongodb
-            host: localhost
+            host: mongodb
+            # host: localhost
 
 server:
     error:
