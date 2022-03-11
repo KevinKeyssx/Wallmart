@@ -1,4 +1,5 @@
 FROM node:alpine AS builder
+LABEL maintainer="Kevin Candia @kevinkeyssx build ui"
 WORKDIR /app
 COPY . /app
 RUN npm install && \

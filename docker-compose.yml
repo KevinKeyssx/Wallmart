@@ -6,10 +6,6 @@ services:
     container_name: mongo-app
     restart: always
     environment:
-      # MONGO_INITDB_ROOT_AUTHENTICATION-DATABASE: none
-      # MONGO_INITDB_ROOT_HOST: localhost
-      # MONGO_INITDB_USERNAME: wallmart
-      # MONGO_INITDB_PASSWORD: wallmart1234
       MONGO_INITDB_DATABASE: wallmart
     ports:
       - 27017:27017

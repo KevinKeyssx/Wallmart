@@ -4,13 +4,9 @@ spring:
     data:
         mongodb:
             authentication-database: none
-            # authentication-database: admin
-            # username: wallmart
-            # password: wallmart1234
             database: wallmart
             port: 27017
             host: mongodb
-            # host: localhost
 
 server:
     error:
