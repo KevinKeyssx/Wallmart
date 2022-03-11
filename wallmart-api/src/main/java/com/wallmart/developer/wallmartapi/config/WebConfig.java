@@ -20,8 +20,8 @@ public class WebConfig implements WebMvcConfigurer {
 	public void addCorsMappings(CorsRegistry registry) {
 		registry.addMapping("/**")
 				.allowedMethods("PUT", "POST", "GET", "DELETE", "OPTION", "HEAD")
-				.maxAge(3600)
-				.allowedOrigins("http://localhost:4200");
+				.maxAge(3600);
+				// .allowedOrigins("http://localhost:4200");
 	}
 
 }

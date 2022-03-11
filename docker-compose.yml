@@ -23,20 +23,22 @@ services:
     container_name: springboot-app
     depends_on:
       - mongodb
+    links:
+      - mongodb
     ports:
       - 8030:8030
     networks:
       - shared-net
 
-  # wallmart-ui:
-  #   image: wallmart-ui:0.0.1
-  #   container_name: angular-app
-  #   ports:
-  #     - 80:80
-  #   networks:
-  #     - shared-net
-  #   depends_on:
-  #     - wallmart-api
+  wallmart-ui:
+    image: wallmart-ui:0.0.1
+    container_name: angular-app
+    ports:
+      - 80:80
+    networks:
+      - shared-net
+    depends_on:
+      - wallmart-api
 
 networks:
   shared-net:
